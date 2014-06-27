@@ -3,24 +3,16 @@
 
 source /home/jkeenan/gitwork/test-against-blead/config-test-against-blead.sh
 
+# Use :: notation rather than -.   Example: MODULE=List::Compare
+MODULE=$1
+test -z $MODULE && \
+    echo "MODULE to be tested against Perl 5 blead is undefined" && \
+    exit 1;
+echo "Testing $MODULE against Perl 5 blead"
+
 set -x
 
-# Install a fresh copy of cpanm under module testing directory
-wget --no-check-certificate --output-document=$MODULE_TEST_DIR/bin/cpanm --quiet http://bit.ly/cpanm 
-
-
-# $MODULE is the module being tested.  I like to just add ones to the end, to
-# keep a record of what I've worked on.
-# Note: Issues with these modules have not necessarily been resolved.
-#MODULE=AnyEvent::Fork
-#MODULE=Crypt::OpenSSL::X509
-#MODULE=Compress::Bzip2
-#MODULE=Wx
-#MODULE=CDB_File
-#MODULE=IP::World
-MODULE=Text::CSV::Hashify
-
-# Get it and its dependencies
+# Get $MODULE  and its dependencies
 chmod 0755 $MODULE_TEST_DIR/bin/cpanm
 $MODULE_TEST_DIR/bin/cpanm --installdeps $MODULE
 
