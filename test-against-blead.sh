@@ -27,7 +27,7 @@ wget --no-check-certificate --output-document=$MODULE_TEST_DIR/bin/cpanm --quiet
 # Get $MODULE  and its dependencies
 chmod 0755 $MODULE_TEST_DIR/bin/cpanm
 $MODULE_TEST_DIR/bin/cpanm \
-    --installdeps --local-lib-contained=$MODULE_TEST_DIR
+    --installdeps --local-lib-contained=$MODULE_TEST_DIR $MODULE
 
 set +x
 
